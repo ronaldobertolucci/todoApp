@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.MainScreen">
+  <grid id="27dc6" binding="contentPane" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="25" left="25" bottom="25" right="25"/>
+    <constraints>
+      <xy x="20" y="20" width="1777" height="1590"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="c0d7f" binding="JPanelToolbar" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="25" left="25" bottom="25" right="25"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="1600" height="200"/>
+            <preferred-size width="1600" height="200"/>
+            <maximum-size width="1920" height="240"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-14716868"/>
+          <enabled value="false"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="e2662" class="javax.swing.JLabel" binding="JLabelToolbarTitle">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Inconsolata" size="28" style="1"/>
+              <foreground color="-721409"/>
+              <icon value="main/resources/tick.png"/>
+              <text value="Gerenciador de tarefas"/>
+            </properties>
+          </component>
+          <component id="4c8fa" class="javax.swing.JLabel" binding="JLabelToolbarSubtitle">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Inconsolata" size="14"/>
+              <foreground color="-721409"/>
+              <text value="Anote tudo para não se esquecer de nada!"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="2d62a" binding="JPanelMain" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="2" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="56336" binding="JPanelProjects" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="25" bottom="0" right="25"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="320" height="100"/>
+                <preferred-size width="320" height="100"/>
+                <maximum-size width="-1" height="100"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-721409"/>
+              <enabled value="true"/>
+            </properties>
+            <border type="etched"/>
+            <children>
+              <component id="c40ef" class="javax.swing.JLabel" binding="JLabelProjectsTitle">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Inconsolata" size="20" style="1"/>
+                  <foreground color="-14716868"/>
+                  <text value="Projetos"/>
+                </properties>
+              </component>
+              <component id="eb37f" class="javax.swing.JLabel" binding="JLabelProjectsAdd">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <icon value="main/resources/add.png"/>
+                  <text value=""/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="cc682" binding="JPanelTasks" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="25" bottom="0" right="25"/>
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="1280" height="100"/>
+                <preferred-size width="1280" height="100"/>
+                <maximum-size width="-1" height="100"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-721409"/>
+              <foreground color="-4473925"/>
+            </properties>
+            <border type="etched"/>
+            <children>
+              <component id="6b94a" class="javax.swing.JLabel" binding="JLabelTasksTitle">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Inconsolata" size="20" style="1"/>
+                  <foreground color="-14716868"/>
+                  <text value="Tarefas"/>
+                </properties>
+              </component>
+              <component id="e5118" class="javax.swing.JLabel" binding="JLabelTasksAdd">
+                <constraints>
+                  <grid row="0" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <icon value="main/resources/add.png"/>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="ac2ca" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Inconsolata" size="12" style="2"/>
+                  <foreground color="-14716868"/>
+                  <text value="(clique em um projeto para adicionar uma tarefa)"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="526ef" binding="JPanelTaskTable" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="1280" height="600"/>
+                <preferred-size width="1280" height="600"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-721409"/>
+              <foreground color="-721409"/>
+              <opaque value="true"/>
+            </properties>
+            <border type="etched"/>
+            <children>
+              <scrollpane id="b5472" binding="JScrollPaneTasks">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-721409"/>
+                  <foreground color="-721409"/>
+                  <opaque value="true"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="2d562" class="javax.swing.JTable" binding="taskTable">
+                    <constraints/>
+                    <properties>
+                      <autoCreateRowSorter value="true"/>
+                      <background color="-721409"/>
+                      <font name="Inconsolata" size="14"/>
+                      <foreground color="-14716868"/>
+                      <gridColor color="-721409"/>
+                      <rowHeight value="35"/>
+                      <rowSelectionAllowed value="false"/>
+                      <selectionBackground color="-4473925"/>
+                      <selectionForeground color="-14079703"/>
+                      <visible value="true"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+              <grid id="48db3" binding="JPanelEmptyList" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="200" left="0" bottom="200" right="0"/>
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-721409"/>
+                  <visible value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="47942" class="javax.swing.JLabel" binding="JLabelEmptyListIcon">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <icon value="main/resources/lists.png"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                  <component id="246e2" class="javax.swing.JLabel" binding="JLabelEmptyListTitle">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-721409"/>
+                      <font name="Inconsolata" size="16" style="1"/>
+                      <foreground color="-14716868"/>
+                      <text value="Nenhuma tarefa cadastrada neste projeto"/>
+                    </properties>
+                  </component>
+                  <component id="fdfa2" class="javax.swing.JLabel" binding="JLabelEmptyListSubtitle">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="Inconsolata" size="12"/>
+                      <foreground color="-4473925"/>
+                      <text value="Clique no botão &quot;+&quot; para adicionar uma nova tarefa"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+          <scrollpane id="d49c5" binding="JPanelProjectList">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="320" height="-1"/>
+                <preferred-size width="320" height="-1"/>
+              </grid>
+            </constraints>
+            <properties/>
+            <border type="etched"/>
+            <children>
+              <component id="95992" class="javax.swing.JList" binding="JListProjects">
+                <constraints/>
+                <properties>
+                  <background color="-721409"/>
+                  <fixedCellHeight value="35"/>
+                  <font name="Inconsolata" size="16" style="0"/>
+                  <selectionBackground color="-14716868"/>
+                  <selectionForeground color="-721409"/>
+                  <selectionMode value="0"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
