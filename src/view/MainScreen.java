@@ -44,16 +44,30 @@ public class MainScreen extends Container {
     private DefaultListModel<Project> projectsModel;
     private TaskTableModel taskModel;
 
-
     public MainScreen() {
         initDataControllers();
         initComponentsModel();
+        initListeners();
+    }
 
+    public void initDataControllers() {
+        projectController = new ProjectController();
+        taskController = new TaskController();
+    }
+
+    public void initComponentsModel() {
+        projectsModel = new DefaultListModel<Project>();
+        loadProjects();
+        createTaskModel();
+        checkProjects();
+    }
+
+    public void initListeners() {
         /*
          mousePressed é uma alternativa melhor ao mouseClicked, pois o mouseClicked não funciona quando
          o usuário aperta o botão, move o mouse e solta o botão.
          */
-        JLabelProjectsAdd.addMouseListener(new MouseAdapter() {
+        this.JLabelProjectsAdd.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
@@ -67,7 +81,7 @@ public class MainScreen extends Container {
                 });
             }
         });
-        JLabelTasksAdd.addMouseListener(new MouseAdapter() {
+        this.JLabelTasksAdd.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
@@ -86,7 +100,7 @@ public class MainScreen extends Container {
             }
         });
         // O update do status só funcionou com mouseClicked
-        taskTable.addMouseListener(new MouseAdapter() {
+        this.taskTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -112,13 +126,26 @@ public class MainScreen extends Container {
                 }
             }
         });
-        JListProjects.addMouseListener(new MouseAdapter() {
+        this.JListProjects.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 int projectIndex = JListProjects.getSelectedIndex();
                 Project project = projectsModel.get(projectIndex);
                 loadTasks(project.getId());
+            }
+        });
+        this.JListProjects.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+                    int projectIndex = JListProjects.getSelectedIndex();
+                    Project project = projectsModel.get(projectIndex);
+                    ProjectDialogScreen projectDialogScreen =
+                            new ProjectDialogScreen(project, projectsModel, projectIndex);
+                    loadProjects();
+                }
             }
         });
     }
@@ -143,26 +170,6 @@ public class MainScreen extends Container {
         frame.setVisible(true);
     }
 
-    public void initDataControllers() {
-        projectController = new ProjectController();
-        taskController = new TaskController();
-    }
-
-    public void initComponentsModel() {
-        projectsModel = new DefaultListModel<Project>();
-        loadProjects();
-
-        taskModel = new TaskTableModel();
-        taskTable.setModel(taskModel);
-        customizeTaskTable();
-
-        if (!projectsModel.isEmpty()) {
-            JListProjects.setSelectedIndex(0);
-            Project project = projectsModel.get(0);
-            loadTasks(project.getId());
-        }
-    }
-
     public void loadProjects() {
         List<Project> projects = projectController.getAll();
         projectsModel.clear(); // caso haja dados, sejam removidos (loadProjects será usado várias vezes)
@@ -175,12 +182,8 @@ public class MainScreen extends Container {
 
     public void loadTasks(int projectId) {
         List<Task> tasks = taskController.getAll(projectId);
-
-        taskModel = new TaskTableModel();
-        taskTable.setModel(taskModel);
-        customizeTaskTable();
+        createTaskModel();
         taskModel.setTasks(tasks);
-
         showTasksTable(!tasks.isEmpty());
     }
 
@@ -209,5 +212,19 @@ public class MainScreen extends Container {
         int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
         frame.setLocation(x, y);
+    }
+
+    public void createTaskModel() {
+        taskModel = new TaskTableModel();
+        taskTable.setModel(taskModel);
+        customizeTaskTable();
+    }
+
+    public void checkProjects() {
+        if (!projectsModel.isEmpty()) {
+            JListProjects.setSelectedIndex(0);
+            Project project = projectsModel.get(0);
+            loadTasks(project.getId());
+        }
     }
 }

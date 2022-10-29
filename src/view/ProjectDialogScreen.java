@@ -24,19 +24,67 @@ public class ProjectDialogScreen extends JDialog {
     private JLabel JLabelDescriptionTitle;
     private JPanel JPanelTextArea;
     private JLabel JLabelBlankNameMessage;
+    private JLabel JLabelProjectDetailTitle;
+    private JButton buttonDel;
 
     private ProjectController projectController;
+    private DefaultListModel<Project> projectsModel;
+    private Project project;
+    private int projectIndex;
 
     public ProjectDialogScreen() {
         projectController = new ProjectController();
+        showCorrectTitles();
+        initSaveListener();
+        dialogInitialization();
+    }
 
-        buttonOK.addActionListener(new ActionListener() {
+    public ProjectDialogScreen(Project project, DefaultListModel<Project> projectsModel, int projectIndex) {
+        this.projectsModel = projectsModel;
+        this.setProject(project);
+        this.setProjectIndex(projectIndex);
+        this.nameTextField.setText(project.getName());
+        this.descriptionTextArea.setText(project.getDescription());
+        projectController = new ProjectController();
+        showCorrectTitles();
+        initUpdateListeners();
+        dialogInitialization();
+    }
+
+    private void showCorrectTitles() {
+        if (this.project != null) {
+            this.JLabelProjectDetailTitle.setVisible(true);
+            this.JLabelHeaderTitle.setVisible(false);
+            this.buttonDel.setVisible(true);
+            this.JLabelHeaderIcon.setVisible(false);
+        } else {
+            this.JLabelProjectDetailTitle.setVisible(false);
+            this.JLabelHeaderTitle.setVisible(true);
+            this.buttonDel.setVisible(false);
+            this.JLabelHeaderIcon.setVisible(true);
+        }
+    }
+
+    private void initSaveListener() {
+        this.buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
+    }
 
-        dialogInitialization();
+    private void initUpdateListeners() {
+        this.buttonOK.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onUpdateOK();
+            }
+        });
+        this.buttonDel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onDelete();
+            }
+        });
     }
 
     private void onOK() {
@@ -55,6 +103,29 @@ public class ProjectDialogScreen extends JDialog {
             }
             this.dispose();
         }
+    }
+
+    private void onUpdateOK() {
+        if (JLabelBlankNameMessage.isVisible()) {
+            JLabelBlankNameMessage.setVisible(false);
+        }
+        if (validateName()) {
+            try {
+                this.project.setName(nameTextField.getText());
+                this.project.setDescription(descriptionTextArea.getText());
+                projectController.update(this.project);
+                JOptionPane.showMessageDialog(rootPane, "Projeto atualizado com sucesso!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            }
+            this.dispose();
+        }
+    }
+
+    public void onDelete() {
+        projectController.removeById(project.getId());
+        projectsModel.remove(projectIndex);
+        this.dispose();
     }
 
     private boolean validateName() {
@@ -82,4 +153,15 @@ public class ProjectDialogScreen extends JDialog {
         frame.setLocation(x, y);
     }
 
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public void setProjectsModel(DefaultListModel<Project> projectsModel) {
+        this.projectsModel = projectsModel;
+    }
+
+    public void setProjectIndex(int projectIndex) {
+        this.projectIndex = projectIndex;
+    }
 }

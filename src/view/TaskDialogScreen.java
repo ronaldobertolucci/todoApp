@@ -37,54 +37,86 @@ public class TaskDialogScreen extends JDialog {
     private JLabel JLabelWrongFormatDeadlineMessage;
     private JLabel JLabelWrongDateDeadlineMessage;
     private JLabel JLabelEditTaskTitle;
-    private TaskController taskController = new TaskController();
+    private TaskController taskController;
     private Project project;
-    private LocalDate today = LocalDate.now();
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private DateTimeFormatter formatter;
     private Task task;
 
     public TaskDialogScreen(Project project) {
+        taskController = new TaskController();
         this.setProject(project);
-
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
-
+        showCorrectTitles();
+        initSaveListener();
         dialogInitialization();
     }
 
     public TaskDialogScreen(Task task) {
+        taskController = new TaskController();
         this.setTask(task);
-
-        this.JLabelHeaderTitle.setVisible(false);
-        this.JLabelEditTaskTitle.setVisible(true);
         this.nameTextField.setText(task.getName());
         this.descriptionTextArea.setText(task.getDescription());
         this.notesTextArea.setText(task.getNotes());
-        this.deadlineTextField.setText(getBrazilianDateFormat(task.getDeadline()));
+        this.deadlineTextField.setText(getBrazilianStringDateFormat(task.getDeadline()));
 
-        buttonOK.addActionListener(new ActionListener() {
+        showCorrectTitles();
+        initUpdateListener();
+        dialogInitialization();
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+    private void showCorrectTitles() {
+        if (this.task != null) {
+            this.JLabelHeaderTitle.setVisible(false);
+            this.JLabelEditTaskTitle.setVisible(true);
+            this.JLabelHeaderIcon.setVisible(false);
+        } else {
+            this.JLabelHeaderTitle.setVisible(true);
+            this.JLabelEditTaskTitle.setVisible(false);
+            this.JLabelHeaderIcon.setVisible(true);
+        }
+    }
+    private void initSaveListener() {
+        this.buttonOK.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onOK();
+            }
+        });
+    }
+
+    private void initUpdateListener() {
+        this.buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onUpdateOK();
             }
         });
-
-        dialogInitialization();
     }
 
+    private void dialogInitialization() {
+        this.setContentPane(contentPane);
+        this.setModal(true);
+        this.getRootPane().setDefaultButton(buttonOK);
+        this.pack();
+        centreWindow(this);
+        this.setVisible(true);
+    }
 
     private void onOK() {
         clearMessages();
-        if (validateDeadline(deadlineTextField.getText()) & validateName()) {
+        if (validateDeadline() & validateName()) {
             try {
                 Task task = new Task();
                 task.setProjectId(project.getId());
                 task.setName(nameTextField.getText());
                 task.setDescription(descriptionTextArea.getText());
                 task.setNotes(notesTextArea.getText());
-                task.setDeadline(getDefaultDateFormat(deadlineTextField.getText()));
+                task.setDeadline(getDefaultStringDateFormat(deadlineTextField.getText()));
                 task.setStatus(0);
                 taskController.save(task);
                 JOptionPane.showMessageDialog(rootPane, "Tarefa salva com sucesso!");
@@ -97,20 +129,18 @@ public class TaskDialogScreen extends JDialog {
 
     private void onUpdateOK() {
         clearMessages();
-        if (validateDeadline(deadlineTextField.getText()) & validateName()) {
+        if (validateDeadline() & validateName()) {
             try {
                 this.task.setName(nameTextField.getText());
                 this.task.setDescription(descriptionTextArea.getText());
                 this.task.setNotes(notesTextArea.getText());
-                this.task.setDeadline(getDefaultDateFormat(deadlineTextField.getText()));
+                this.task.setDeadline(getDefaultStringDateFormat(deadlineTextField.getText()));
                 taskController.update(this.task);
                 JOptionPane.showMessageDialog(rootPane, "Tarefa atualizada com sucesso!");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(rootPane, e.getMessage());
             }
             this.dispose();
-            this.JLabelHeaderTitle.setVisible(true);
-            this.JLabelEditTaskTitle.setVisible(false);
         }
     }
 
@@ -123,11 +153,11 @@ public class TaskDialogScreen extends JDialog {
         }
     }
 
-    private boolean validateDeadline(String inputDate) {
+    private boolean validateDeadline() {
         if (!Objects.equals(deadlineTextField.getText(), "")) {
             try {
-                LocalDate deadline = LocalDate.parse(deadlineTextField.getText(), formatter);
-                LocalDate date = LocalDate.parse(inputDate, formatter);
+                LocalDate deadline = getDate(deadlineTextField.getText());
+                LocalDate today = LocalDate.now();
                 if (!today.isAfter(deadline)) {
                     return true;
                 } else {
@@ -144,31 +174,24 @@ public class TaskDialogScreen extends JDialog {
         }
     }
 
-    private String getDefaultDateFormat(String inputDate) {
+    private String getDefaultStringDateFormat(String inputDate) {
+        formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate date = LocalDate.parse(inputDate, formatter);
         return date.toString();
     }
 
-    private String getBrazilianDateFormat(String inputDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private String getBrazilianStringDateFormat(String inputDate) {
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(inputDate, formatter);
         return date.getDayOfMonth()+ "/" + date.getMonthValue() + "/" + date.getYear();
     }
 
-    private void dialogInitialization() {
-        this.setContentPane(contentPane);
-        this.setModal(true);
-        this.getRootPane().setDefaultButton(buttonOK);
-        this.pack();
-        centreWindow(this);
-        this.setVisible(true);
+    public LocalDate getDate(String stringDate) {
+        formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(stringDate, formatter);
     }
 
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public void clearMessages() {
+    private void clearMessages() {
         if (JLabelBlankNameMessage.isVisible()) {
             JLabelBlankNameMessage.setVisible(false);
         }
@@ -183,11 +206,7 @@ public class TaskDialogScreen extends JDialog {
         }
     }
 
-    public void setTask(Task task) {
-        this.task = task;
-    }
-
-    public void centreWindow(Window frame) {
+    private void centreWindow(Window frame) {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);

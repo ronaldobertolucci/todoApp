@@ -20,29 +20,31 @@ public class DeleteConfirmationDialogScreen extends JDialog {
     public DeleteConfirmationDialogScreen(Task task, TaskTableModel taskModel) {
         this.setTask(task);
         this.setTaskModel(taskModel);
-        this.taskController = new TaskController();
+        taskController = new TaskController();
+        initListeners();
+        dialogInitialization();
+    }
 
-        buttonOK.addActionListener(new ActionListener() {
+    private void initListeners() {
+        this.buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
-        buttonCancel.addActionListener(new ActionListener() {
+        this.buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         });
 
         // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 onCancel();
             }
         });
-
-        dialogInitialization();
     }
 
     private void onOK() {
