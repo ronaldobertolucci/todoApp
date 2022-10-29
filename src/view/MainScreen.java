@@ -105,8 +105,8 @@ public class MainScreen extends Container {
                         break;
                     case 5:
                         task = taskModel.getTasks().get(rowIndex);
-                        taskController.removeById(task.getId());
-                        taskModel.getTasks().remove(task);
+                        DeleteConfirmationDialogScreen deleteScreen =
+                                new DeleteConfirmationDialogScreen(task, taskModel);
                         loadTasks(task.getProjectId());
                         break;
                 }
@@ -140,6 +140,7 @@ public class MainScreen extends Container {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        centreWindow(frame);
     }
 
     public void initDataControllers() {
@@ -203,4 +204,10 @@ public class MainScreen extends Container {
         }
     }
 
+    public static void centreWindow(Window frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
+    }
 }
