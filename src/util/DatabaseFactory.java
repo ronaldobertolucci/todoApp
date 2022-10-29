@@ -61,7 +61,7 @@ public class DatabaseFactory {
                 "\"createdAt\" TEXT NOT NULL, " +
                 "\"updatedAt\" TEXT NOT NULL, " +
                 "FOREIGN KEY (\"projectId\") REFERENCES \"projects\"(\"id\") " +
-                "ON DELETE CASCADE ON UPDATE CASCADE, " +
+                "ON DELETE CASCADE, " +
                 "PRIMARY KEY(\"id\" AUTOINCREMENT)" +
                 ")";
 

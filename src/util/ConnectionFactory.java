@@ -1,5 +1,7 @@
 package util;
 
+import org.sqlite.SQLiteConfig;
+
 import java.sql.*;
 
 public class ConnectionFactory {
@@ -8,7 +10,9 @@ public class ConnectionFactory {
         Connection conn = null;
         try {
             String url = "jdbc:sqlite:" + path; // db parameters
-            conn = DriverManager.getConnection(url); // create a connection to the database
+            SQLiteConfig config = new SQLiteConfig();
+            config.enforceForeignKeys(true); //SQLite does not support foreign keys by default
+            conn = DriverManager.getConnection(url, config.toProperties()); // create a connection to the database
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
