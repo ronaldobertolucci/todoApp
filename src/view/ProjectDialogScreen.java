@@ -4,6 +4,7 @@ import controller.ProjectController;
 import model.Project;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.Objects;
 
@@ -70,7 +71,15 @@ public class ProjectDialogScreen extends JDialog {
         this.setModal(true);
         this.getRootPane().setDefaultButton(buttonOK);
         this.pack();
+        centreWindow(this);
         this.setVisible(true);
+    }
+
+    public void centreWindow(Window frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
     }
 
 }

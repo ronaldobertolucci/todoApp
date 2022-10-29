@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.MainScreen">
   <grid id="27dc6" binding="contentPane" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="25" left="25" bottom="25" right="25"/>
+    <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
       <xy x="20" y="20" width="1777" height="1590"/>
     </constraints>
@@ -11,9 +11,9 @@
       <grid id="c0d7f" binding="JPanelToolbar" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="25" left="25" bottom="25" right="25"/>
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <minimum-size width="1600" height="200"/>
-            <preferred-size width="1600" height="200"/>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="1200" height="150"/>
+            <preferred-size width="1200" height="150"/>
             <maximum-size width="1920" height="240"/>
           </grid>
         </constraints>
@@ -57,9 +57,9 @@
           <grid id="56336" binding="JPanelProjects" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="25" bottom="0" right="25"/>
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="320" height="100"/>
-                <preferred-size width="320" height="100"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="2" indent="0" use-parent-layout="false">
+                <minimum-size width="240" height="75"/>
+                <preferred-size width="240" height="75"/>
                 <maximum-size width="-1" height="100"/>
               </grid>
             </constraints>
@@ -94,8 +94,8 @@
             <margin top="0" left="25" bottom="0" right="25"/>
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="1280" height="100"/>
-                <preferred-size width="1280" height="100"/>
+                <minimum-size width="960" height="75"/>
+                <preferred-size width="960" height="75"/>
                 <maximum-size width="-1" height="100"/>
               </grid>
             </constraints>
@@ -140,8 +140,8 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="1280" height="600"/>
-                <preferred-size width="1280" height="600"/>
+                <minimum-size width="960" height="450"/>
+                <preferred-size width="960" height="450"/>
               </grid>
             </constraints>
             <properties>
@@ -167,7 +167,7 @@
                     <properties>
                       <autoCreateRowSorter value="true"/>
                       <background color="-721409"/>
-                      <font name="Inconsolata" size="14"/>
+                      <font name="Inconsolata" size="13"/>
                       <foreground color="-14716868"/>
                       <gridColor color="-721409"/>
                       <rowHeight value="35"/>
@@ -180,9 +180,9 @@
                 </children>
               </scrollpane>
               <grid id="48db3" binding="JPanelEmptyList" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="200" left="0" bottom="200" right="0"/>
+                <margin top="100" left="0" bottom="100" right="0"/>
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-721409"/>
@@ -226,9 +226,9 @@
           </grid>
           <scrollpane id="d49c5" binding="JPanelProjectList">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="320" height="-1"/>
-                <preferred-size width="320" height="-1"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="0" anchor="8" fill="2" indent="0" use-parent-layout="false">
+                <minimum-size width="240" height="-1"/>
+                <preferred-size width="240" height="-1"/>
               </grid>
             </constraints>
             <properties/>
@@ -239,7 +239,7 @@
                 <properties>
                   <background color="-721409"/>
                   <fixedCellHeight value="35"/>
-                  <font name="Inconsolata" size="16" style="0"/>
+                  <font name="Inconsolata" size="15" style="0"/>
                   <selectionBackground color="-14716868"/>
                   <selectionForeground color="-721409"/>
                   <selectionMode value="0"/>

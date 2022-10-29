@@ -125,7 +125,7 @@ public class MainScreen extends Container {
 
     public void customizeTaskTable() {
         taskTable.setSelectionMode(SINGLE_SELECTION);
-        taskTable.getTableHeader().setFont(new Font("Inconsolata", Font.BOLD, 14));
+        taskTable.getTableHeader().setFont(new Font("Inconsolata", Font.BOLD, 12));
         taskTable.getTableHeader().setBackground(new Color(31,112,60));
         taskTable.getTableHeader().setForeground(new Color(244,253,255));
 
@@ -139,8 +139,8 @@ public class MainScreen extends Container {
         frame.setContentPane(new MainScreen().contentPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setVisible(true);
         centreWindow(frame);
+        frame.setVisible(true);
     }
 
     public void initDataControllers() {
@@ -204,7 +204,7 @@ public class MainScreen extends Container {
         }
     }
 
-    public static void centreWindow(Window frame) {
+    public void centreWindow(Window frame) {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);

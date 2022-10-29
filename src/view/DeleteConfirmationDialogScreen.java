@@ -5,6 +5,7 @@ import model.Task;
 import util.TaskTableModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class DeleteConfirmationDialogScreen extends JDialog {
@@ -62,6 +63,7 @@ public class DeleteConfirmationDialogScreen extends JDialog {
         this.getRootPane().setDefaultButton(buttonOK);
         this.setLocation(200,200);
         this.pack();
+        centreWindow(this);
         this.setVisible(true);
     }
 
@@ -71,5 +73,12 @@ public class DeleteConfirmationDialogScreen extends JDialog {
 
     public void setTaskModel(TaskTableModel taskModel) {
         this.taskModel = taskModel;
+    }
+
+    public void centreWindow(Window frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
     }
 }
