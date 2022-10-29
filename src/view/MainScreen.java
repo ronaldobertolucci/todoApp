@@ -98,6 +98,11 @@ public class MainScreen extends Container {
                         task = taskModel.getTasks().get(rowIndex); // busque a task na linha
                         taskController.update(task); // salve a atualização da task no db
                         break;
+                    case 4:
+                        task = taskModel.getTasks().get(rowIndex);
+                        TaskDialogScreen taskDialogScreen = new TaskDialogScreen(task);
+                        loadTasks(task.getProjectId());
+                        break;
                     case 5:
                         task = taskModel.getTasks().get(rowIndex);
                         taskController.removeById(task.getId());
