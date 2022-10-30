@@ -31,6 +31,7 @@ public class ProjectDialogScreen extends JDialog {
     private DefaultListModel<Project> projectsModel;
     private Project project;
     private int projectIndex;
+    private String actionPerformedOnClose;
 
     public ProjectDialogScreen() {
         projectController = new ProjectController();
@@ -98,6 +99,7 @@ public class ProjectDialogScreen extends JDialog {
                 project.setDescription(descriptionTextArea.getText());
                 projectController.save(project);
                 JOptionPane.showMessageDialog(rootPane, "Projeto salvo com sucesso!");
+                setActionPerformedOnClose("save");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(rootPane, e.getMessage());
             }
@@ -115,6 +117,7 @@ public class ProjectDialogScreen extends JDialog {
                 this.project.setDescription(descriptionTextArea.getText());
                 projectController.update(this.project);
                 JOptionPane.showMessageDialog(rootPane, "Projeto atualizado com sucesso!");
+                setActionPerformedOnClose("update");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(rootPane, e.getMessage());
             }
@@ -125,6 +128,7 @@ public class ProjectDialogScreen extends JDialog {
     public void onDelete() {
         projectController.removeById(project.getId());
         projectsModel.remove(projectIndex);
+        setActionPerformedOnClose("delete");
         this.dispose();
     }
 
@@ -163,5 +167,13 @@ public class ProjectDialogScreen extends JDialog {
 
     public void setProjectIndex(int projectIndex) {
         this.projectIndex = projectIndex;
+    }
+
+    public String getActionPerformedOnClose() {
+        return actionPerformedOnClose;
+    }
+
+    public void setActionPerformedOnClose(String actionPerformedOnClose) {
+        this.actionPerformedOnClose = actionPerformedOnClose;
     }
 }

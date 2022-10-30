@@ -32,13 +32,15 @@ public class MainScreen extends Container {
     private JLabel JLabelTasksAdd;
     private JPanel JPanelEmptyList;
     private JLabel JLabelEmptyListIcon;
-    private JLabel JLabelEmptyListTitle;
-    private JLabel JLabelEmptyListSubtitle;
+    private JLabel JLabelEmptyTaskListTitle;
+    private JLabel JLabelEmptyTaskListSubtitle;
     private JTable taskTable;
     private JPanel contentPane;
     private JScrollPane JPanelProjectList;
     private JPanel JPanelTaskTable;
     private JScrollPane JScrollPaneTasks;
+    private JLabel JLabelEmptyProjectListTitle;
+    private JLabel JLabelEmptyProjectListSubtitle;
     private ProjectController projectController;
     private TaskController taskController;
     private DefaultListModel<Project> projectsModel;
@@ -47,6 +49,7 @@ public class MainScreen extends Container {
     public MainScreen() {
         initDataControllers();
         initComponentsModel();
+        checkProjects();
         initListeners();
     }
 
@@ -59,7 +62,6 @@ public class MainScreen extends Container {
         projectsModel = new DefaultListModel<Project>();
         loadProjects();
         createTaskModel();
-        checkProjects();
     }
 
     public void initListeners() {
@@ -77,6 +79,7 @@ public class MainScreen extends Container {
                     public void windowClosed(WindowEvent e) {
                         super.windowClosed(e);
                         loadProjects();
+                        checkProjects(projectDialogScreen.getActionPerformedOnClose());
                     }
                 });
             }
@@ -144,7 +147,15 @@ public class MainScreen extends Container {
                     Project project = projectsModel.get(projectIndex);
                     ProjectDialogScreen projectDialogScreen =
                             new ProjectDialogScreen(project, projectsModel, projectIndex);
-                    loadProjects();
+                    projectDialogScreen.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            super.windowClosed(e);
+                            loadProjects();
+                            checkProjects(projectDialogScreen.getActionPerformedOnClose(), projectIndex);
+                        }
+                    });
+
                 }
             }
         });
@@ -178,6 +189,7 @@ public class MainScreen extends Container {
             projectsModel.addElement(project);
         }
         JListProjects.setModel(projectsModel);
+        hasProjects(!projects.isEmpty());
     }
 
     public void loadTasks(int projectId) {
@@ -187,23 +199,35 @@ public class MainScreen extends Container {
         showTasksTable(!tasks.isEmpty());
     }
 
+    private void hasProjects(boolean hasProjects) {
+        if (hasProjects) {
+            JLabelEmptyProjectListSubtitle.setVisible(false);
+            JLabelEmptyProjectListTitle.setVisible(false);
+            JLabelEmptyTaskListTitle.setVisible(true);
+            JLabelEmptyTaskListSubtitle.setVisible(true);
+        } else {
+            JPanelEmptyList.setVisible(true);
+            JLabelEmptyProjectListSubtitle.setVisible(true);
+            JLabelEmptyProjectListTitle.setVisible(true);
+            JLabelEmptyTaskListTitle.setVisible(false);
+            JLabelEmptyTaskListSubtitle.setVisible(false);
+            JScrollPaneTasks.setVisible(false);
+        }
+    }
+
     private void showTasksTable(boolean projectHasTasks) {
         if (projectHasTasks) {
             if (JPanelEmptyList.isVisible()) {
                 JPanelEmptyList.setVisible(false);
-//                JPanelTaskTable.remove(JPanelEmptyList);
             }
-//            JPanelTaskTable.add(JScrollPaneTasks);
             JScrollPaneTasks.setVisible(true);
             JScrollPaneTasks.setSize(JPanelTaskTable.getWidth() - 3, JPanelTaskTable.getHeight() - 3);
         } else {
             if (JScrollPaneTasks.isVisible()) {
                 JScrollPaneTasks.setVisible(false);
-//                JPanelTaskTable.remove(JScrollPaneTasks);
             }
-//            JPanelTaskTable.add(JPanelEmptyList);
             JPanelEmptyList.setVisible(true);
-            JPanelEmptyList.setSize(JPanelTaskTable.getWidth(), JPanelTaskTable.getHeight());
+            JPanelEmptyList.setSize(JPanelTaskTable.getWidth() - 4, JPanelTaskTable.getHeight() - 4);
         }
     }
 
@@ -224,6 +248,34 @@ public class MainScreen extends Container {
         if (!projectsModel.isEmpty()) {
             JListProjects.setSelectedIndex(0);
             Project project = projectsModel.get(0);
+            loadTasks(project.getId());
+        }
+    }
+
+    public void checkProjects(String actionPerformed) {
+        if (!projectsModel.isEmpty()) {
+            Project project;
+            if (actionPerformed == "save") {
+                JListProjects.setSelectedIndex(JListProjects.getLastVisibleIndex());
+                project = projectsModel.get(JListProjects.getLastVisibleIndex());
+            } else {
+                JListProjects.setSelectedIndex(0);
+                project = projectsModel.get(0);
+            }
+            loadTasks(project.getId());
+        }
+    }
+
+    public void checkProjects(String actionPerformed, int projectIndex) {
+        if (!projectsModel.isEmpty()) {
+            Project project;
+            if (actionPerformed == "update") {
+                JListProjects.setSelectedIndex(projectIndex);
+                project = projectsModel.get(JListProjects.getSelectedIndex());
+            } else {
+                JListProjects.setSelectedIndex(0);
+                project = projectsModel.get(0);
+            }
             loadTasks(project.getId());
         }
     }
