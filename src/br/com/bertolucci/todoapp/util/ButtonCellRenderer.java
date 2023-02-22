@@ -1,4 +1,4 @@
-package util;
+package br.com.bertolucci.todoapp.util;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -25,7 +25,7 @@ public class ButtonCellRenderer extends DefaultTableCellRenderer {
         JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected,
                 hasFocus, row, column);
         label.setHorizontalAlignment(CENTER);
-        label.setIcon(new ImageIcon(getClass().getResource("/main/resources/" + buttonType + ".png")));
+        label.setIcon(new ImageIcon(getClass().getResource("/br/com/bertolucci/todoapp/resources/" + buttonType + ".png")));
         return label;
     }
 }

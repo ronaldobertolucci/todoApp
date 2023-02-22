@@ -1,7 +1,7 @@
-package controller;
+package br.com.bertolucci.todoapp.controller;
 
-import model.Task;
-import util.ConnectionFactory;
+import br.com.bertolucci.todoapp.model.Task;
+import br.com.bertolucci.todoapp.util.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +28,7 @@ public class TaskController {
         PreparedStatement statement = null;
 
         try {
-            conn = ConnectionFactory.getConnection("src/db/tododb.db");
+            conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql);
             statement.setInt(1, task.getProjectId());
             statement.setString(2, task.getName());
@@ -61,7 +61,7 @@ public class TaskController {
         PreparedStatement statement = null;
 
         try {
-            conn = ConnectionFactory.getConnection("src/db/tododb.db");
+            conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql);
             statement.setInt(1, task.getProjectId());
             statement.setString(2, task.getName());
@@ -86,7 +86,7 @@ public class TaskController {
         PreparedStatement statement = null;
 
         try {
-            conn = ConnectionFactory.getConnection("src/db/tododb.db");
+            conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql); // protejer de SQL Injection
             statement.setInt(1, taskId); // trocar o primeiro ? por taskId
             statement.execute();
@@ -106,7 +106,7 @@ public class TaskController {
         List<Task> tasks = new ArrayList<Task>();
 
         try {
-            conn = ConnectionFactory.getConnection("src/db/tododb.db");
+            conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql);
             statement.setInt(1, projectId);
             resultSet = statement.executeQuery();

@@ -1,12 +1,12 @@
-package view;
+package br.com.bertolucci.todoapp.view;
 
-import controller.ProjectController;
-import controller.TaskController;
-import model.Project;
-import model.Task;
-import util.ButtonCellRenderer;
-import util.DeadlineCellRenderer;
-import util.TaskTableModel;
+import br.com.bertolucci.todoapp.controller.ProjectController;
+import br.com.bertolucci.todoapp.controller.TaskController;
+import br.com.bertolucci.todoapp.model.Project;
+import br.com.bertolucci.todoapp.model.Task;
+import br.com.bertolucci.todoapp.util.ButtonCellRenderer;
+import br.com.bertolucci.todoapp.util.DeadlineCellRenderer;
+import br.com.bertolucci.todoapp.util.TaskTableModel;
 
 import javax.swing.*;
 import java.awt.*;
