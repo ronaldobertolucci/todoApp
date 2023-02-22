@@ -1,8 +1,8 @@
-package view;
+package br.com.bertolucci.todoapp.view;
 
-import controller.TaskController;
-import model.Task;
-import util.TaskTableModel;
+import br.com.bertolucci.todoapp.controller.TaskController;
+import br.com.bertolucci.todoapp.model.Task;
+import br.com.bertolucci.todoapp.util.TaskTableModel;
 
 import javax.swing.*;
 import java.awt.*;

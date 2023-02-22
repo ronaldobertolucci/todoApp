@@ -1,7 +1,7 @@
-package controller;
+package br.com.bertolucci.todoapp.controller;
 
-import model.Project;
-import util.ConnectionFactory;
+import br.com.bertolucci.todoapp.model.Project;
+import br.com.bertolucci.todoapp.util.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +24,7 @@ public class ProjectController {
         PreparedStatement statement = null;
 
         try {
-            conn = ConnectionFactory.getConnection("src/db/tododb.db");
+            conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql);
             statement.setString(1, project.getName());
             statement.setString(2, project.getDescription());
@@ -49,7 +49,7 @@ public class ProjectController {
         PreparedStatement statement = null;
 
         try {
-            conn = ConnectionFactory.getConnection("src/db/tododb.db");
+            conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql);
             statement.setString(1, project.getName());
             statement.setString(2, project.getDescription());
@@ -70,7 +70,7 @@ public class ProjectController {
         PreparedStatement statement = null;
 
         try {
-            conn = ConnectionFactory.getConnection("src/db/tododb.db");
+            conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql);
             statement.setInt(1, projectId);
             statement.execute();
@@ -90,7 +90,7 @@ public class ProjectController {
         List<Project> projects = new ArrayList<Project>();
 
         try {
-            conn = ConnectionFactory.getConnection("src/db/tododb.db");
+            conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql);
             resultSet = statement.executeQuery();
 

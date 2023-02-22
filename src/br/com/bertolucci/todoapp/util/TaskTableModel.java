@@ -1,6 +1,6 @@
-package util;
+package br.com.bertolucci.todoapp.util;
 
-import model.Task;
+import br.com.bertolucci.todoapp.model.Task;
 
 import javax.swing.table.AbstractTableModel;
 import java.time.LocalDate;

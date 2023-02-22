@@ -1,7 +1,7 @@
-package view;
+package br.com.bertolucci.todoapp.view;
 
-import controller.ProjectController;
-import model.Project;
+import br.com.bertolucci.todoapp.controller.ProjectController;
+import br.com.bertolucci.todoapp.model.Project;
 
 import javax.swing.*;
 import java.awt.*;

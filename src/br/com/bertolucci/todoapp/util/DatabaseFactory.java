@@ -1,25 +1,19 @@
-package util;
+package br.com.bertolucci.todoapp.util;
 
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 public class DatabaseFactory {
-    private String path;
-
-    public DatabaseFactory(String path) {
-        this.path = path;
-    }
-
     public void checkSQLiteDatabase() {
-        File file = new File (path);
+        File file = new File ("C:/tododb/todoapp.db");
 
         if (file.exists()) {
             System.out.print("Conectando ao banco de dados existente.");
         }
         else{
-            // crie o diretório e o db para o projeto
-            boolean dir = new File("src/db/").mkdir();
+            System.out.print("Criando novo banco de dados.");
+            boolean dir = new File("C:/tododb/").mkdir();
             createProjectsTable();
             createTasksTable();
         }
@@ -39,7 +33,7 @@ public class DatabaseFactory {
         PreparedStatement statement = null;
 
         try {
-            conn = ConnectionFactory.getConnection("src/db/tododb.db");
+            conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql);
             statement.execute();
         } catch (Exception e) {
@@ -69,7 +63,7 @@ public class DatabaseFactory {
         PreparedStatement statement = null;
 
         try {
-            conn = ConnectionFactory.getConnection("src/db/tododb.db");
+            conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql);
             statement.execute();
         } catch (Exception e) {
