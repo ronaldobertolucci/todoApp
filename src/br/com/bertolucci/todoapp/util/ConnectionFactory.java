@@ -9,7 +9,7 @@ public class ConnectionFactory {
     public static Connection getConnection() {
         Connection conn = null;
         try {
-            String url = "jdbc:sqlite:C:/tododb/todoapp.db"; // db parameters
+            String url = "jdbc:sqlite:todoapp.db"; // db parameters
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true); //SQLite does not support foreign keys by default
             conn = DriverManager.getConnection(url, config.toProperties()); // create a connection to the database

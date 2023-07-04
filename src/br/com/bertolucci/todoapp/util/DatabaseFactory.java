@@ -6,21 +6,13 @@ import java.sql.PreparedStatement;
 
 public class DatabaseFactory {
     public void checkSQLiteDatabase() {
-        File file = new File ("C:/tododb/todoapp.db");
-
-        if (file.exists()) {
-            System.out.print("Conectando ao banco de dados existente.");
-        }
-        else{
-            System.out.print("Criando novo banco de dados.");
-            boolean dir = new File("C:/tododb/").mkdir();
-            createProjectsTable();
-            createTasksTable();
-        }
+        File file = new File ("todoapp.db");
+        createProjectsTable();
+        createTasksTable();
     }
 
     public void createProjectsTable() {
-        String sql = "CREATE TABLE \"projects\" (" +
+        String sql = "CREATE TABLE IF NOT EXISTS \"projects\" (" +
                 "\"id\"	INTEGER NOT NULL, " +
                 "\"name\" TEXT NOT NULL UNIQUE, "+
                 "\"description\" TEXT, " +
@@ -44,7 +36,7 @@ public class DatabaseFactory {
     }
 
     public void createTasksTable() {
-        String sql = "CREATE TABLE \"tasks\" (" +
+        String sql = "CREATE TABLE IF NOT EXISTS \"tasks\" (" +
                 "\"id\"	INTEGER NOT NULL, " +
                 "\"projectId\"	INTEGER NOT NULL, " +
                 "\"name\" TEXT NOT NULL, "+
